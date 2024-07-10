@@ -33,11 +33,19 @@ CREATE TABLE ShortTermParking (
     Short_Term_Parking_Description VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Favorites (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    car_park_id INT,
-    username VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    user_address VARCHAR(255) NOT NULL,
-    FOREIGN KEY (car_park_id) REFERENCES CarParks(ID)
+CREATE TABLE AppUsers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE UserFavourites (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    car_park_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES AppUsers(id),
+    FOREIGN KEY (car_park_id) REFERENCES CarParks(ID),
+    UNIQUE KEY user_carpark_unique (user_id, car_park_id)
 );
