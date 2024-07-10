@@ -1,10 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql2/promise');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000'  // 替换为你的前端应用的实际域名
+}));
 
 // 数据库配置
 const dbConfig = {
@@ -113,6 +118,6 @@ app.post('/favourites', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0',() => {
   console.log(`Server running on port ${PORT}`);
 });
