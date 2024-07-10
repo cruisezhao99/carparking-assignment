@@ -6,13 +6,15 @@ answer two:
 
 answer three:
     api 接口程序： carpark_queryfilter.js
+    
     run : node carpark_queryfilter.js
+    
     then browser to open http://localhost:3000/api-docs, get Swagger docs
+
 
 获取筛选后的停车场列表：
 
 
-   
    fetch('/carparks?freeParking=true&nightParking=true&minHeight=2.0')
   .then(response => response.json())
   .then(data => {
